@@ -5,7 +5,7 @@ require 'jgit/common'
 require 'jgit/group'
 require 'jgit'
 
-class GroupTest < Minitest::Test
+class GroupTest < Minitest::Unit::TestCase
 
 	def test_add
 
