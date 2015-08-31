@@ -55,7 +55,7 @@ module Jgit
 				jexit name == "default" ? "can't remove default group" : "no such group"
 			else
 				delete_file(CURRENT_GROUP) if name == load_data(CURRENT_GROUP)
-				delete_file(task_path(name))
+				delete_file(project_path(name))
 
 				save_data(GROUP_DATA, data.to_json)
 			end

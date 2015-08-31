@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "git management tool"
   spec.description   = "Jgit is a tool to help you manage multiple seperate git-base project in local file system."
-  spec.homepage      = "https://rubygems.org/gems/jgit"
+  spec.homepage      = "https://github.com/Jintin/jgit"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or

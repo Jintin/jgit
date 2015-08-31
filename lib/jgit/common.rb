@@ -7,8 +7,8 @@ FOLDER_PATH = "#{Dir.home}/.jgit"
 GROUP_DATA = "#{FOLDER_PATH}/group.json"
 CURRENT_GROUP = "#{FOLDER_PATH}/current.json"
 
-def task_path(current = nil)
-	current = load_data(CURRENT_GROUP) unless current.nil?
+def project_path(current = nil)
+	current = load_data(CURRENT_GROUP) if current.nil?
 	"#{FOLDER_PATH}/record_#{current}.json"
 end
 

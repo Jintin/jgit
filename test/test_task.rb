@@ -4,11 +4,11 @@ require 'minitest/autorun'
 require 'jgit/common'
 require 'jgit'
 
-class TaskTest < Minitest::Unit::TestCase
+class TaskTest < Minitest::Test
 
 	def test_add
 
-		jgit = Jgit::Task.new
+		jgit = Jgit::Project.new
 		jgit.add(".", "test")
 		data = jgit.list(false)
 		jgit.remove("test")
@@ -17,7 +17,7 @@ class TaskTest < Minitest::Unit::TestCase
 
 	def test_remove
 
-		jgit = Jgit::Task.new
+		jgit = Jgit::Project.new
 		jgit.add(".", "test")
 		data = jgit.list(false)
 		jgit.remove("test")
@@ -28,9 +28,9 @@ class TaskTest < Minitest::Unit::TestCase
 
 	def test_rename
 
-		jgit = Jgit::Task.new
+		jgit = Jgit::Project.new
 		jgit.add(".", "test")
-		jgit.rename("test","newtest")
+		jgit.rename("test", "newtest")
 		data = jgit.list(false)
 		jgit.remove("newtest")
 		assert data["test"].nil? && !data["newtest"].nil?

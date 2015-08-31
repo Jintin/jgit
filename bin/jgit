@@ -2,4 +2,4 @@
 require 'thor'
 require 'jgit'
 
-Jgit::Task.start(ARGV)
+Jgit::Project.start(ARGV)

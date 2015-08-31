@@ -5,7 +5,7 @@ require 'jgit/common'
 require 'jgit/group'
 require 'jgit'
 
-class GroupTest < Minitest::Unit::TestCase
+class GroupTest < Minitest::Test
 
 	def test_add
 
@@ -40,7 +40,7 @@ class GroupTest < Minitest::Unit::TestCase
 	end
 
 	def test_chgrp
-		task = Jgit::Task.new
+		task = Jgit::Project.new
 		group = Jgit::Group.new
 
 		current = load_data(CURRENT_GROUP)
