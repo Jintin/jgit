@@ -3,8 +3,8 @@
 [![Gem Version](https://badge.fury.io/rb/jgit.svg)](http://badge.fury.io/rb/jgit)
 [![Build Status](https://travis-ci.org/Jintin/jgit.svg?branch=master)](https://travis-ci.org/Jintin/jgit)
 
-jgit is a command line tool to help you manage multiple seperate git base project in local file system.
-You can excute command all at once like `jgit status` `jgit fetch` `jgit pull` or any other command you want.
+jgit is a command line tool to help you manage multiple separate git base project in local file system.
+You can execute command all at once like `jgit status` `jgit fetch` `jgit pull` or any other command you want.
 
 ## Installation
 
@@ -16,22 +16,25 @@ Just install it by gem:
 
 The most commonly used command:
 
-     $ jgit add <path> <name>         # add new task
-     $ jgit list                      # list all tasks
-     $ jgit remove <name>             # remove task
-     $ jgit group [COMMAND]           # group management
+     $ jgit add <path> <name> [-g GROUP]              # add new project
+     $ jgit list [-g GROUP]                           # list all projects
+     $ jgit remove <name> [-g GROUP]                  # remove project
+     $ jgit group [COMMAND]                           # group management
+     $ jgit chgrp <name>                              # change default group
+     $ jgit rename <name> <new_name> [-g GROUP]       # rename project    
 
 You can use same command like git:
     
-     $ jgit pull                      # git pull on every task
-     $ jgit push                      # git push on every task
-     $ jgit status                    # git status on every task
-     $ jgit fetch                     # git fetch on every task
-     
+     $ jgit commit [-g GROUP | -p PROJECT]            # git commit on given project
+     $ jgit fetch [-g GROUP | -p PROJECT]             # git fetch on given project
+     $ jgit pull [-g GROUP | -p PROJECT]              # git pull on given project
+     $ jgit push [-g GROUP | -p PROJECT]              # git push on given project
+     $ jgit status [-g GROUP | -p PROJECT]            # git status on given project
+
 Or direct exec command:
      
-     $ jgit exe <command...>          # exec command on each task
-    
+     $ jgit exe <command...> [-g GROUP | -p PROJECT]  # exec command on given project
+     
 See `jgit help` or `jgit help <command>` for more information.
 
 ## Contributing

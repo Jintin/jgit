@@ -3,6 +3,7 @@
 require 'jgit/common'
 require 'jgit/group'
 require 'jgit/desc'
+require 'jgit/version'
 require 'thor'
 
 module Jgit
@@ -11,7 +12,7 @@ module Jgit
 
 		PROMPT_TASK = "key in project name:"
 
-		desc 'add <path> <name>', 'add new project'
+		desc 'add <path> <name> [-g GROUP]', 'add new project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 
 		def add(path = nil, name = nil)
@@ -28,7 +29,7 @@ module Jgit
 
 		end
 
-		desc 'list', 'list all projects'
+		desc 'list [-g GROUP]', 'list all projects'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map ls: :list
 
@@ -47,7 +48,7 @@ module Jgit
 
 		end
 
-		desc 'remove <name>', 'remove project'
+		desc 'remove <name> [-g GROUP]', 'remove project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map rm: :remove
 
@@ -68,7 +69,7 @@ module Jgit
 
 		end
 
-		desc 'rename <name> <new_name>', 'rename project'
+		desc 'rename <name> <new_name> [-g GROUP]', 'rename project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map rn: :rename
 
@@ -93,41 +94,49 @@ module Jgit
 			end
 		end
 
-		desc 'status', 'git status on every project'
+		desc 'commit [-g GROUP | -p PROJECT]', 'git commit on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
-		method_option :project, :aliases => '-t', :desc => "project to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
+
+		def commit
+			exe "git commit ."
+		end
+
+		desc 'status [-g GROUP | -p PROJECT]', 'git status on given project'
+		method_option :group, :aliases => '-g', :desc => "group to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		def status
 			exe "git status"
 		end
 
-		desc 'fetch', 'git fetch on every project'
+		desc 'fetch [-g GROUP | -p PROJECT]', 'git fetch on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
-		method_option :project, :aliases => '-t', :desc => "project to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		def fetch
 			exe "git fetch"
 		end
 
-		desc 'pull', 'git pull on every project'
+		desc 'pull [-g GROUP | -p PROJECT]', 'git pull on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
-		method_option :project, :aliases => '-t', :desc => "project to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		def pull
 			exe "git pull"
 		end
 
-		desc 'push', 'git push on every project'
+		desc 'push [-g GROUP | -p PROJECT]', 'git push on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
-		method_option :project, :aliases => '-t', :desc => "project to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		def push
 			exe "git push"
 		end
 
-		desc 'exe <command...>', 'exec command on every project'
+		desc 'exe <command...> [-g GROUP | -p PROJECT]', 'exec command on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
-		method_option :project, :aliases => '-t', :desc => "project to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		long_desc EXE_DESC
 
@@ -164,6 +173,15 @@ module Jgit
 			else
 				jexit "no such group"
 			end
+		end
+
+		desc 'version', 'version of jgit'
+		map "-v" => :version
+		map "--version" => :version
+
+		def version
+			puts "jgit #{Jgit::VERSION} -- jgit is a git management tool in Ruby"
+			puts "visit https://github.com/Jintin/jgit for more information"
 		end
 
 		desc "group [COMMAND]", "group management"

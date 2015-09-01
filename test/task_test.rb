@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require 'jgit/common'
 require 'jgit'
 
-class TaskTest < Minitest::Unit::TestCase
+class TaskTest < Minitest::Test
 
 	def test_add
 
