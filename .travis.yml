@@ -1,8 +1,9 @@
 language: ruby
 rvm:
+  - 2.1.0
   - 2.2.0
 before_install:
   - gem install bundler -v 1.10.6
   - gem install minitest -v 5.8.0
-sudo: required
+
 
