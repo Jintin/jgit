@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jintinapps@gmail.com"]
 
   spec.summary       = "git management tool"
-  spec.description   = "Jgit is a tool to help you manage multiple seperate git-base project in local file system."
+  spec.description   = "Jgit is a tool to help you manage multiple separate git-base project in local file system."
   spec.homepage      = "https://github.com/Jintin/jgit"
   spec.license       = "MIT"
 
