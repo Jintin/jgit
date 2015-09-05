@@ -143,7 +143,7 @@ module Jgit
 		long_desc EXE_DESC
 
 		def exe(command)
-			
+
 			list = list(false, get_group)
 
 			jexit "no project, use 'jgit add' to add project first" if list.empty?
