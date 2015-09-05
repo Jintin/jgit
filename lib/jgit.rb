@@ -17,27 +17,26 @@ module Jgit
 
 		def add(path = nil, name = nil)
 
+			group = get_group
 			path = prompt("key in project path:(empty for current dir)", Dir.pwd) if path.nil?
 			path = File.expand_path(path)
 			jexit "no such dir" unless File.directory?(path)
 
 			name = prompt("key in project name:(empty for current dir)", File.basename(Dir.getwd)) if name.nil?
-			data = list(false, options[:group])
+			data = list(false, group)
 			data[name] = path
 
-			save_data(project_path(options[:group]), data.to_json)
+			save_data(project_path(group), data.to_json)
 
 		end
 
-		desc 'list [-g GROUP]', 'list all projects'
+		desc 'list [-g GROUP]', 'list all projects, alias: ls'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map ls: :list
 
 		def list(show = true, group = nil)
 
-			group = options[:group] unless options[:group].nil?
-			group = get_current_group if group.nil?
-
+			group = get_group(group)
 			data = load_obj(project_path(group), Hash)
 			if show
 				data.each do |key, val|
@@ -48,37 +47,40 @@ module Jgit
 
 		end
 
-		desc 'remove <name> [-g GROUP]', 'remove project'
+		desc 'remove <name> [-g GROUP]', 'remove project, alias: rm'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map rm: :remove
 
 		def remove(name = nil)
 
+			group = get_group
 			if name.nil?
-				data = list(true, options[:group])
+				data = list(true, group)
 				name = prompt(PROMPT_TASK)
 			else
-				data = list(false, options[:group])
+				data = list(false, group)
 			end
 
 			if data.delete(name).nil?
 				jexit "no such project"
 			else
-				save_data(project_path(options[:group]), data.to_json)
+				save_data(project_path(group), data.to_json)
 			end
 
 		end
 
-		desc 'rename <name> <new_name> [-g GROUP]', 'rename project'
+		desc 'rename <name> <new_name> [-g GROUP]', 'rename project, alias: rn'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		map rn: :rename
 
 		def rename(name = nil, new_name = nil)
+
+			group = get_group
 			if name.nil?
-				data = list(true, options[:group])
+				data = list(true, group)
 				name = prompt(PROMPT_TASK)
 			else
-				data = list(false, options[:group])
+				data = list(false, group)
 			end
 
 			new_name = prompt("key in new project name:", File.basename(Dir.getwd)) if new_name.nil?
@@ -90,11 +92,11 @@ module Jgit
 				jexit "no such project"
 			else
 				data[new_name] = result
-				save_data(project_path(options[:group]), data.to_json)
+				save_data(project_path(group), data.to_json)
 			end
 		end
 
-		desc 'commit [-g GROUP | -p PROJECT]', 'git commit on given project'
+		desc 'commit [-g GROUP] [-p PROJECT]', 'git commit on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
@@ -102,7 +104,7 @@ module Jgit
 			exe "git commit ."
 		end
 
-		desc 'status [-g GROUP | -p PROJECT]', 'git status on given project'
+		desc 'status [-g GROUP] [-p PROJECT]', 'git status on given project, alias: st'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
@@ -110,7 +112,7 @@ module Jgit
 			exe "git status"
 		end
 
-		desc 'fetch [-g GROUP | -p PROJECT]', 'git fetch on given project'
+		desc 'fetch [-g GROUP] [-p PROJECT]', 'git fetch on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
@@ -118,7 +120,7 @@ module Jgit
 			exe "git fetch"
 		end
 
-		desc 'pull [-g GROUP | -p PROJECT]', 'git pull on given project'
+		desc 'pull [-g GROUP] [-p PROJECT]', 'git pull on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
@@ -126,7 +128,7 @@ module Jgit
 			exe "git pull"
 		end
 
-		desc 'push [-g GROUP | -p PROJECT]', 'git push on given project'
+		desc 'push [-g GROUP] [-p PROJECT]', 'git push on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
@@ -134,14 +136,15 @@ module Jgit
 			exe "git push"
 		end
 
-		desc 'exe <command...> [-g GROUP | -p PROJECT]', 'exec command on given project'
+		desc 'exe <command...> [-g GROUP] [-p PROJECT]', 'exec command on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
 
 		long_desc EXE_DESC
 
 		def exe(command)
-			list = list(false, options[:group])
+			
+			list = list(false, get_group)
 
 			jexit "no project, use 'jgit add' to add project first" if list.empty?
 
@@ -175,7 +178,7 @@ module Jgit
 			end
 		end
 
-		desc 'version', 'version of jgit'
+		desc 'version', 'version of jgit, alias: -v'
 		map "-v" => :version
 		map "--version" => :version
 
@@ -186,6 +189,17 @@ module Jgit
 
 		desc "group [COMMAND]", "group management"
 		subcommand "group", Group
+
+		no_commands do
+			def get_group(group = nil)
+				group = options[:group] if group.nil?
+				group = "" if group == "default"
+				group = get_current_group if group.nil?
+
+				group
+			end
+
+		end
 
 	end
 end
