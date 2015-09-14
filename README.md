@@ -10,7 +10,7 @@ You can execute command all at once like `jgit status` `jgit fetch` `jgit pull` 
 
 Just install it by gem:
 
-    $ gem install jgit
+    $ sudo gem install jgit
 
 ## Usage
 
