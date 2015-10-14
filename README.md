@@ -16,24 +16,24 @@ Just install it by gem:
 
 The most commonly used command:
 
-     $ jgit add <path> <name> [-g GROUP]              # add new project
-     $ jgit list [-g GROUP]                           # list all projects, alias: ls
-     $ jgit remove <name> [-g GROUP]                  # remove project, alias: rm
-     $ jgit group [COMMAND]                           # group management
-     $ jgit chgrp <name>                              # change default group
-     $ jgit rename <name> <new_name> [-g GROUP]       # rename project, alias: rn 
+    $ jgit add <path> <name> [-g GROUP]              # add new project
+    $ jgit list [-g GROUP]                           # list all projects, alias: ls
+    $ jgit remove <name> [-g GROUP]                  # remove project, alias: rm
+    $ jgit group [COMMAND]                           # group management
+    $ jgit chgrp <name>                              # change default group
+    $ jgit rename <name> <new_name> [-g GROUP]       # rename project, alias: rn 
 
 You can use same command like git:
     
-     $ jgit commit [-g GROUP] [-p PROJECT]            # git commit on given project, alias: co
-     $ jgit fetch [-g GROUP] [-p PROJECT]             # git fetch on given project
-     $ jgit pull [-g GROUP] [-p PROJECT]              # git pull on given project
-     $ jgit push [-g GROUP] [-p PROJECT]              # git push on given project
-     $ jgit status [-g GROUP] [-p PROJECT]            # git status on given project, alias: st
+    $ jgit commit [-g GROUP] [-p PROJECT]            # git commit on given project, alias: co
+    $ jgit fetch [-g GROUP] [-p PROJECT]             # git fetch on given project
+    $ jgit pull [-g GROUP] [-p PROJECT]              # git pull on given project
+    $ jgit push [-g GROUP] [-p PROJECT]              # git push on given project
+    $ jgit status [-g GROUP] [-p PROJECT]            # git status on given project, alias: st
 
 Or direct exec command:
      
-     $ jgit exe <command...> [-g GROUP] [-p PROJECT]  # exec command on given project
+    $ jgit exe <command...> [-g GROUP] [-p PROJECT]  # exec command on given project
      
 See `jgit help` or `jgit help <command>` for more information.
 

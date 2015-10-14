@@ -128,6 +128,14 @@ module Jgit
 			exe "git pull"
 		end
 
+		desc 'diff [-g GROUP] [-p PROJECT]', 'git diff on given project'
+		method_option :group, :aliases => '-g', :desc => "group to operate"
+		method_option :project, :aliases => '-p', :desc => "project to operate"
+
+		def diff
+			exe "git diff ."
+		end
+
 		desc 'push [-g GROUP] [-p PROJECT]', 'git push on given project'
 		method_option :group, :aliases => '-g', :desc => "group to operate"
 		method_option :project, :aliases => '-p', :desc => "project to operate"
