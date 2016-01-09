@@ -13,7 +13,7 @@ def project_path(current = nil)
 end
 
 def get_current_group
-	if File.exists?(CURRENT_GROUP)
+	if File.exist?(CURRENT_GROUP)
 		File.read(CURRENT_GROUP)
 	else
 		""
@@ -36,7 +36,7 @@ def save_data(path, data)
 end
 
 def load_data(path)
-	if File.exists?(path)
+	if File.exist?(path)
 		File.read(path)
 	else
 		""
@@ -44,7 +44,7 @@ def load_data(path)
 end
 
 def load_obj(path, cls)
-	if File.exists?(path)
+	if File.exist?(path)
 		file = File.read(path)
 		JSON.parse(file)
 	else
