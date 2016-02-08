@@ -34,7 +34,7 @@ module Jgit
 
 			if show
 				data.each do |val|
-					puts (val == current ? "> " : "  ") + val
+					puts((val == current ? "> " : "  ") + val)
 				end
 			end
 
