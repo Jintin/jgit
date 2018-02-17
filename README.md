@@ -1,4 +1,5 @@
 # jgit
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f44b3545d07f4b89b165f41bef1f597a)](https://app.codacy.com/app/Jintin/jgit?utm_source=github.com&utm_medium=referral&utm_content=Jintin/jgit&utm_campaign=badger)
 [![Gem Version](https://badge.fury.io/rb/jgit.svg)](http://badge.fury.io/rb/jgit) [![Build Status](https://travis-ci.org/Jintin/jgit.svg?branch=master)](https://travis-ci.org/Jintin/jgit) [![Code Climate](https://codeclimate.com/github/Jintin/jgit/badges/gpa.svg)](https://codeclimate.com/github/Jintin/jgit)
 
 jgit is a command line tool to help you manage multiple separate git base project in local file system. You can execute command all at once like `jgit status` `jgit fetch` `jgit pull` or any other command you want.
